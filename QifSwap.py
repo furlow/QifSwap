@@ -3,7 +3,7 @@ import os
 from PySide.QtCore import *
 from PySide.QtGui import *
 
-__appname__ = "Credit Card inflow and outflow swap"
+__appname__ = "Qifswap"
 
 def swap_outflows_and_inflows(qif_filename):
     qif = open(qif_filename, 'r+')
@@ -21,20 +21,20 @@ class Program(QDialog):
         self.setWindowTitle(__appname__)
 
         #Create button for opening credit card file
-        self.open_credit_card_file = QPushButton("open credit card file")
+        self.open_file_button = QPushButton("Open File")
 
         #Align the widget in the container
         layout = QVBoxLayout()
-        layout.addWidget(self.open_credit_card_file)
+        layout.addWidget(self.open_file_button)
         self.setLayout(layout)
 
 
         #connect to functions for saving
-        self.open_credit_card_file.clicked.connect(self.openCreditCardFile)
+        self.open_file_button.clicked.connect(self.openQifFile)
 
-    def openCreditCardFile(self):
+    def openQifFile(self):
         qif_filename, _ = QFileDialog.getOpenFileName(self,
-                                                    "Open Credit card file",
+                                                    "Open File",
                                                     "",
                                                     "Bank File (*.qif)"
                                                     )
@@ -43,7 +43,7 @@ class Program(QDialog):
 
 
 def main():
-    sys.argv[0] = "Credit Card inflow outflow swap"
+    sys.argv[0] = "QifSwap"
     app = QApplication(sys.argv)
     form = Program()
     form.show()
